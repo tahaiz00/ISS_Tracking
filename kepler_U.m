@@ -34,8 +34,15 @@ while abs(ratio) > error && n <= nMax
 n = n + 1;
 C = stumpC(a*x^2);
 S = stumpS(a*x^2);
+<<<<<<< HEAD
 F = ro*vro/sqrt(mu)*x^2*C + (1 - a*ro)*x^3*S + ro*x - sqrt(mu)*dt;
 dFdx = ro*vro/sqrt(mu)*x*(1 - a*x^2*S)+(1 - a*ro)*x^2*C+ro;
+=======
+F = ro*vro/sqrt(mu)*x^2*C + (1 - a*ro)*x^3*S + ro*x-...
+sqrt(mu)*dt;
+dFdx = ro*vro/sqrt(mu)*x*(1 - a*x^2*S)+...
+(1 - a*ro)*x^2*C+ro;
+>>>>>>> master
 ratio = F/dFdx;
 x = x - ratio;
 end
