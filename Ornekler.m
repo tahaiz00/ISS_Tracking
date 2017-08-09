@@ -1,28 +1,39 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
-% Example_3_05
+% Example_3_06
 % ˜˜˜˜˜˜˜˜˜˜˜˜
 %
-% This program uses Algorithm 3.2 and the data of
-% Example 3.5 to solve Kepler’s equation for the hyperbola.
+% This program uses Algorithm 3.3 and the data of Example 3.6
+% to solve the universal Kepler’s equation.
 %
-% e - eccentricity
-% M - hyperbolic mean anomaly (dimensionless)
-% F - hyperbolic eccentric anomaly (dimensionless)
+% mu - gravitational parameter (kmˆ3/sˆ2)
+% x - the universal anomaly (kmˆ0.5)
+% dt - time since x = 0 (s)
+% ro - radial position when x = 0 (km)
+% vro - radial velocity when x = 0 (km/s)
+% a - semimajor axis (km)
 %
-% User M-function required: kepler_H
+% User M-function required: kepler_U
 % ------------------------------------------------------------
 clear
-%...Input data for Example 3.5:
-e = 2.7696;
-M = 40.69;
+global mu
+mu = 398600;
+%...Input data for Example 3.6:
+ro = 10000;
+vro = 3.0752;
+dt = 3600;
+a = -19655;
 %...
-%...Pass the input data to the function kepler_H, which returns F:
-F = kepler_H(e, M);
-%...Echo the input data and output to the command window:
+%...Pass the input data to the function kepler_U, which returns x
+%...(Universal Kepler’s requires the reciprocal of
+% semimajor axis):
+x = kepler_U(dt, ro, vro, 1/a);
+%...Echo the input data and output the results to the command window:
 fprintf('---------------------------------------------------')
-fprintf('\n Example 3.5\n')
-fprintf('\n Eccentricity = %g',e)
-fprintf('\n Hyperbolic mean anomaly = %g\n',M)
-fprintf('\n Hyperbolic eccentric anomaly = %g',F)
+fprintf('\n Example 3.6\n')
+fprintf('\n Initial radial coordinate (km) = %g',ro)
+fprintf('\n Initial radial velocity (km/s) = %g',vro)
+fprintf('\n Elapsed time (seconds) = %g',dt)
+fprintf('\n Semimajor axis (km) = %g\n',a)
+fprintf('\n Universal anomaly (kmˆ0.5) = %g',x)
 fprintf('\n-----------------------------------------------\n')
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
