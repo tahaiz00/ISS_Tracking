@@ -13,8 +13,8 @@
 % ------------------------------------------------------------
 clear
 %...Input data for Example 3.5:
-e = 2.7696;
-M = 40.69;
+e = 2.94;
+M = 44.69;
 %...
 %...Pass the input data to the function kepler_H, which returns F:
 F = kepler_H(e, M);
