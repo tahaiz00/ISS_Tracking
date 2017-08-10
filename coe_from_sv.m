@@ -1,6 +1,7 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function coe = coe_from_sv(R,V)
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+%
 % This function computes the classical orbital elements (coe)
 % from the state vector (R,V) using Algorithm 4.1.
 %
@@ -43,11 +44,7 @@ incl = acos(H(3)/h);
 N = cross([0 0 1],H);
 n = norm(N);
 %...Equation 4.9:
-<<<<<<< HEAD
 if n ~= 0
-=======
-if n ? = 0
->>>>>>> master
 RA = acos(N(1)/n);
 if N(2) < 0
 RA = 2*pi - RA;
@@ -56,17 +53,10 @@ else
 RA = 0;
 end
 %...Equation 4.10:
-<<<<<<< HEAD
 E = 1/mu*((v^2 - mu/r)*R - r*vr*V);
 e = norm(E);
 %...Equation 4.12 (incorporating the case e = 0):
 if n ~= 0
-=======
-E = 1/mu*((vˆ2 - mu/r)*R - r*vr*V);
-e = norm(E);
-%...Equation 4.12 (incorporating the case e = 0):
-if n ? = 0
->>>>>>> master
 if e > eps
 w = acos(dot(N,E)/n/e);
 if E(3) < 0
@@ -92,11 +82,8 @@ else
 TA = 2*pi - acos(dot(N,R)/n/r);
 end
 end
+%...Equation
 %...Equation 2.61 (a < 0 for a hyperbola):
-<<<<<<< HEAD
 a = h^2/mu/(1 - e^2);
-=======
-a = hˆ2/mu/(1 - eˆ2);
->>>>>>> master
 coe = [h e RA incl w TA a];
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
