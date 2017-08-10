@@ -25,7 +25,8 @@
 %
 % User M-function required: coe_from_sv
 % ------------------------------------------------------------
-clear
+clear all
+clc
 global mu
 deg = pi/180;
 mu = 398600;
@@ -40,10 +41,8 @@ fprintf('---------------------------------------------------')
 fprintf('\n Example 4.3\n')
 fprintf('\n Gravitational parameter (kmˆ3/sˆ2) = %g\n', mu)
 fprintf('\n State vector:\n')
-fprintf('\n r (km) = [%g %g %g]', ...
-r(1), r(2), r(3))
-fprintf('\n v (km/s) = [%g %g %g]', ...
-v(1), v(2), v(3))
+fprintf('\n r (km) = [%g %g %g]', r(1), r(2), r(3))
+fprintf('\n v (km/s) = [%g %g %g]',v(1), v(2), v(3))
 disp(' ')
 fprintf('\n Angular momentum (kmˆ2/s) = %g', coe(1))
 fprintf('\n Eccentricity = %g', coe(2))
@@ -54,7 +53,7 @@ fprintf('\n True anomaly (deg) = %g', coe(6)/deg)
 fprintf('\n Semimajor axis (km): = %g', coe(7))
 %...if the orbit is an ellipse, output its period:
 if coe(2)<1
-T = 2*pi/sqrt(mu)*coe(7)ˆ1.5; % Equation 2.73
+T = 2*pi/sqrt(mu)*coe(7)^ 1.5; % Equation 2.73
 fprintf('\n Period:')
 fprintf('\n Seconds = %g', T)
 fprintf('\n Minutes = %g', T/60)
@@ -62,4 +61,3 @@ fprintf('\n Hours = %g', T/3600)
 fprintf('\n Days = %g', T/24/3600)
 end
 fprintf('\n-----------------------------------------------\n')
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
