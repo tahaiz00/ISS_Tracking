@@ -20,7 +20,8 @@
 %
 % User M-functions required: sv_from_coe
 % ------------------------------------------------------------
-clear
+clear all
+clc
 global mu
 deg = pi/180;
 mu = 398600;
