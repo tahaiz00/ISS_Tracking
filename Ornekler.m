@@ -76,6 +76,7 @@ fprintf('\n v (km/s) = [%g %g %g]', v(1), v(2), v(3))
 %
 % User M-functions required: gibbs, coe_from_sv
 % ------------------------------------------------------------
+<<<<<<< HEAD
 clear all
 clc
 deg = pi/180;
@@ -85,6 +86,12 @@ mu = 398600;
 r1 = [-294.32 4265.1 5986.7];
 r2 = [-1365.4 3637.6 6346.8];
 r3 = [-2940.3 2473.7 6555.8];
+=======
+clear
+%...Input data for Example 3.5:
+e = 2.94;
+M = 44.69;
+>>>>>>> Kepler_H-yeni_deger_testi
 %...
 %...Echo the input data to the command window:
 fprintf('---------------------------------------------------')
