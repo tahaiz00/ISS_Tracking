@@ -1,39 +1,65 @@
+% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% Example_4_03
 % ˜˜˜˜˜˜˜˜˜˜˜˜
 %
-% This program computes the state vector (R,V) from the
-% initial state vector (R0,V0) and the elapsed time using the
-% data in Example 3.7.
+% This program uses Algorithm 4.1 to obtain the orbital
+% elements from the state vector provided in Example 4.3.
 %
+% pi - 3.1415926...
+% deg - factor for converting between degrees and radians
 % mu - gravitational parameter (kmˆ3/sˆ2)
-% R0 - the initial position vector (km)
-% V0 - the initial velocity vector (km/s)
-% R - the final position vector (km)
-% V - the final velocity vector (km/s)
-% t - elapsed time (s)
+% r - position vector (km) in the geocentric equatorial
+% frame
+% v - velocity vector (km/s) in the geocentric equatorial
+% frame
+% coe - orbital elements [h e RA incl w TA a]
+% where h = angular momentum (kmˆ2/s)
+% e = eccentricity
+% RA = right ascension of the ascending node
+% (rad)
+% incl = orbit inclination (rad)
+% w = argument of perigee (rad)
+% TA = true anomaly (rad)
+% a = semimajor axis (km)
+% T - Period of an elliptic orbit (s)
 %
-% User M-functions required: rv_from_r0v0
+% User M-function required: coe_from_sv
 % ------------------------------------------------------------
 clear
 global mu
+deg = pi/180;
 mu = 398600;
-%...Input data for Example 3,7:
-R0 = [ 7000 -12124 0];
-V0 = [2.6679 4.6210 0];
-t = 3600;
+%...Input data:
+r = [ -6045 -3490 2500];
+v = [-3.457 6.618 2.533];
 %...
-%...Algorithm 3.4:
-[R, V] = rv_from_r0v0(R0, V0, t);
-%...Echo the input data and output the results to the command window:
+%...Algorithm 4.1:
+coe = coe_from_sv(r,v);
+%...Echo the input data and output results to the command window:
 fprintf('---------------------------------------------------')
-fprintf('\n Example 3.7\n')
-fprintf('\n Initial position vector (km):')
-fprintf('\n r0 = (%g, %g, %g)\n', R0(1), R0(2), R0(3))
-fprintf('\n Initial velocity vector (km/s):')
-fprintf('\n v0 = (%g, %g, %g)', V0(1), V0(2), V0(3))
-fprintf('\n\n Elapsed time = %g s\n',t)
-fprintf('\n Final position vector (km):')
-fprintf('\n r = (%g, %g, %g)\n', R(1), R(2), R(3))
-fprintf('\n Final velocity vector (km/s):')
-fprintf('\n v = (%g, %g, %g)', V(1), V(2), V(3))
+fprintf('\n Example 4.3\n')
+fprintf('\n Gravitational parameter (kmˆ3/sˆ2) = %g\n', mu)
+fprintf('\n State vector:\n')
+fprintf('\n r (km) = [%g %g %g]', ...
+r(1), r(2), r(3))
+fprintf('\n v (km/s) = [%g %g %g]', ...
+v(1), v(2), v(3))
+disp(' ')
+fprintf('\n Angular momentum (kmˆ2/s) = %g', coe(1))
+fprintf('\n Eccentricity = %g', coe(2))
+fprintf('\n Right ascension (deg) = %g', coe(3)/deg)
+fprintf('\n Inclination (deg) = %g', coe(4)/deg)
+fprintf('\n Argument of perigee (deg) = %g', coe(5)/deg)
+fprintf('\n True anomaly (deg) = %g', coe(6)/deg)
+fprintf('\n Semimajor axis (km): = %g', coe(7))
+%...if the orbit is an ellipse, output its period:
+if coe(2)<1
+T = 2*pi/sqrt(mu)*coe(7)ˆ1.5; % Equation 2.73
+fprintf('\n Period:')
+fprintf('\n Seconds = %g', T)
+fprintf('\n Minutes = %g', T/60)
+fprintf('\n Hours = %g', T/3600)
+fprintf('\n Days = %g', T/24/3600)
+end
 fprintf('\n-----------------------------------------------\n')
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
