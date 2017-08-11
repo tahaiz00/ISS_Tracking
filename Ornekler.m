@@ -1,68 +1,123 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
-% Example_5_06
+% Example_5_10
 % ˜˜˜˜˜˜˜˜˜˜˜˜
 %
-% This program uses Algorithm 5.3 to obtain the local sidereal
-% time from the data provided in Example 5.6.
+% This program uses Algorithms 5.4 and 4.1 to obtain the
+% orbital elements from the observational data provided in
+% Example 5.10.
 %
-% lst - local sidereal time (degrees)
-% EL - east longitude of the site (west longitude is
-% negative):
-% degrees (0 - 360)
-% minutes (0 - 60)
-% seconds (0 - 60)
-% WL - west longitude
-% year - range: 1901 - 2099
-% month - range: 1 - 12
-% day - range: 1 - 31
-% ut - universal time
-% hour (0 - 23)
-% minute (0 - 60)
-% second (0 - 60)
+% deg - conversion factor between degrees and radians
+% pi - 3.1415926...
+% mu - gravitational parameter (kmˆ3/sˆ2)
 %
-% User M-function required: LST
+% Re - equatorial radius of the earth (km)
+% f - earth’s flattening factor
+% wE - angular velocity of the earth (rad/s)
+% omega - earth’s angular velocity vector (rad/s) in the
+% geocentric equatorial frame
+%
+% rho - slant range of object (km)
+% rhodot - range rate (km/s)
+% A - azimuth (deg) of object relative to observation
+% site
+% Adot - time rate of change of azimuth (deg/s)
+% a - elevation angle (deg) of object relative to
+% observation site
+% adot - time rate of change of elevation angle
+% (degrees/s)
+%
+% theta - local sidereal time (deg) of tracking site
+% phi - geodetic latitude (deg) of site
+% H - elevation of site (km)
+%
+% r - geocentric equatorial position vector of object (km)
+% v - geocentric equatorial velocity vector of object (km)
+%
+% coe - orbital elements [h e RA incl w TA a]
+% where h = angular momentum (kmˆ2/s)
+% e = eccentricity
+% RA = right ascension of the ascending node
+% (rad)
+% incl = inclination of the orbit (rad)
+% w = argument of perigee (rad)
+% TA = true anomaly (rad)
+% a = semimajor axis (km)
+% rp - perigee radius (km)
+% T - period of elliptical orbit (s)
+%
+% User M-functions required: rv_from_observe, coe_from_sv
 % ------------------------------------------------------------
 clear all
 clc
-%...Input data for Example 5.6:
-% East longitude:
-degrees = 139;
-minutes = 47;
-seconds = 0;
-% Date:
-year = 2004;
-month = 3;
-day = 3;
-% Universal time:
-hour = 4;
-minute = 30;
-second = 0;
+
+global f Re wE mu
+deg = pi/180;
+f = 1/298.256421867;
+Re = 6378.13655;
+wE = 7.292115e-5;
+mu = 398600.4418;
+%...Input data for Example 5.10:
+rho = 2551;
+rhodot = 0;
+A = 90;
+Adot = 0.1130;
+a = 30;
+adot = 0.05651;
+theta = 300;
+phi = 60;
+H = 0;
 %...
-%...Convert negative (west) longitude to east longitude:
-if degrees < 0
-degrees = degrees + 360;
-end
-%...Express the longitudes as decimal numbers:
-EL = degrees + minutes/60 + seconds/3600;
-WL = 360 - EL;
-%...Express universal time as a decimal number:
-ut = hour + minute/60 + second/3600;
-%...Algorithm 5.3:
-lst = LST(year, month, day, ut, EL);
-%...Echo the input data and output the results to the command window:
+%...Algorithm 5.4:
+[r,v] = rv_from_observe(rho, rhodot, A, Adot, a, adot, theta, phi, H);
+%...Algorithm 4.1:
+coe = coe_from_sv(r,v);
+h = coe(1);
+e = coe(2);
+RA = coe(3);
+incl = coe(4);
+w = coe(5);
+TA = coe(6);
+a = coe(7);
+%...Equation 2.40
+rp = h^2/mu/(1 + e);
+%...Echo the input data and output the solution to
+% the command window:
 fprintf('---------------------------------------------------')
-fprintf('\n Example 5.6: Local sidereal time calculation\n')
-fprintf('\n Input data:\n');
-fprintf('\n Year = %g', year)
-fprintf('\n Month = %g', month)
-fprintf('\n Day = %g', day)
-fprintf('\n UT (hr) = %g', ut)
-fprintf('\n West Longitude (deg) = %g', WL)
-fprintf('\n East Longitude (deg) = %g', EL)
-fprintf('\n\n');
+fprintf('\n Example 5.10')
+fprintf('\n\n Input data:\n')
+fprintf('\n Slant range (km) = %g', rho)
+fprintf('\n Slant range rate (km/s) = %g', rhodot)
+fprintf('\n Azimuth (deg) = %g', A)
+fprintf('\n Azimuth rate (deg/s) = %g', Adot)
+fprintf('\n Elevation (deg) = %g', a)
+fprintf('\n Elevation rate (deg/s) = %g', adot)
+fprintf('\n Local sidereal time (deg) = %g', theta)
+fprintf('\n Latitude (deg) = %g', phi)
+fprintf('\n Altitude above sea level (km) = %g', H)
+fprintf('\n\n')
 fprintf(' Solution:')
-fprintf('\n');
-fprintf('\n Local Sidereal Time (deg) = %g', lst)
-fprintf('\n Local Sidereal Time (hr) = %g', lst/15)
+fprintf('\n\n State vector:\n')
+fprintf('\n r (km) = [%g, %g, %g]', ...
+r(1), r(2), r(3))
+fprintf('\n v (km/s) = [%g, %g, %g]', ...
+v(1), v(2), v(3))
+fprintf('\n\n Orbital elements:\n')
+fprintf('\n Angular momentum (kmˆ2/s) = %g', h)
+fprintf('\n Eccentricity = %g', e)
+fprintf('\n Inclination (deg) = %g', incl/deg)
+fprintf('\n RA of ascending node (deg) = %g', RA/deg)
+fprintf('\n Argument of perigee (deg) = %g', w/deg)
+fprintf('\n True anomaly (deg) = %g\n', TA/deg)
+fprintf('\n Semimajor axis (km) = %g', a)
+fprintf('\n Perigee radius (km) = %g', rp)
+%...If the orbit is an ellipse, output its period:
+if e < 1
+T = 2*pi/sqrt(mu)*a^1.5;
+fprintf('\n Period:')
+fprintf('\n Seconds = %g', T)
+fprintf('\n Minutes = %g', T/60)
+fprintf('\n Hours = %g', T/3600)
+fprintf('\n Days = %g', T/24/3600)
+end
 fprintf('\n-----------------------------------------------\n')
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
