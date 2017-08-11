@@ -1,46 +1,68 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
-% Example_5_04
+% Example_5_06
 % ˜˜˜˜˜˜˜˜˜˜˜˜
 %
-% This program computes J0 and the Julian day number using the
-% data in Example 5.4.
+% This program uses Algorithm 5.3 to obtain the local sidereal
+% time from the data provided in Example 5.6.
 %
+% lst - local sidereal time (degrees)
+% EL - east longitude of the site (west longitude is
+% negative):
+% degrees (0 - 360)
+% minutes (0 - 60)
+% seconds (0 - 60)
+% WL - west longitude
 % year - range: 1901 - 2099
 % month - range: 1 - 12
 % day - range: 1 - 31
-% hour - range: 0 - 23 (Universal Time)
-% minute - range: 0 - 60
-% second - range: 0 - 60
-% ut - universal time (hr)
-% j0 - Julian day number at 0 hr UT
-% jd - Julian day number at specified UT
+% ut - universal time
+% hour (0 - 23)
+% minute (0 - 60)
+% second (0 - 60)
 %
-% User M-function required: J0
+% User M-function required: LST
 % ------------------------------------------------------------
-clear
-%...Input data from Example 5.4:
+clear all
+clc
+%...Input data for Example 5.6:
+% East longitude:
+degrees = 139;
+minutes = 47;
+seconds = 0;
+% Date:
 year = 2004;
-month = 5;
-day = 12;
-hour = 14;
-minute = 45;
-second = 30;
+month = 3;
+day = 3;
+% Universal time:
+hour = 4;
+minute = 30;
+second = 0;
 %...
+%...Convert negative (west) longitude to east longitude:
+if degrees < 0
+degrees = degrees + 360;
+end
+%...Express the longitudes as decimal numbers:
+EL = degrees + minutes/60 + seconds/3600;
+WL = 360 - EL;
+%...Express universal time as a decimal number:
 ut = hour + minute/60 + second/3600;
-%...Equation 5.48:
-j0 = J0(year, month, day);
-%...Equation 5.47:
-jd = j0 + ut/24;
+%...Algorithm 5.3:
+lst = LST(year, month, day, ut, EL);
 %...Echo the input data and output the results to the command window:
 fprintf('---------------------------------------------------')
-fprintf('\n Example 5.4: Julian day calculation\n')
+fprintf('\n Example 5.6: Local sidereal time calculation\n')
 fprintf('\n Input data:\n');
 fprintf('\n Year = %g', year)
 fprintf('\n Month = %g', month)
 fprintf('\n Day = %g', day)
-fprintf('\n Hour = %g', hour)
-fprintf('\n Minute = %g', minute)
-fprintf('\n Second = %g\n', second)
-fprintf('\n Julian day number = %11.3f', jd);
+fprintf('\n UT (hr) = %g', ut)
+fprintf('\n West Longitude (deg) = %g', WL)
+fprintf('\n East Longitude (deg) = %g', EL)
+fprintf('\n\n');
+fprintf(' Solution:')
+fprintf('\n');
+fprintf('\n Local Sidereal Time (deg) = %g', lst)
+fprintf('\n Local Sidereal Time (hr) = %g', lst/15)
 fprintf('\n-----------------------------------------------\n')
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
