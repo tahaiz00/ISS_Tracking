@@ -1,5 +1,24 @@
+<<<<<<< HEAD
 clear all
 clc
+=======
+% ˜˜˜˜˜˜˜˜˜˜˜˜
+%
+% This program computes the state vector (R,V) from the
+% initial state vector (R0,V0) and the elapsed time using the
+% data in Example 3.7.
+%
+% mu - gravitational parameter (kmˆ3/sˆ2)
+% R0 - the initial position vector (km)
+% V0 - the initial velocity vector (km/s)
+% R - the final position vector (km)
+% V - the final velocity vector (km/s)
+% t - elapsed time (s)
+%
+% User M-functions required: rv_from_r0v0
+% ------------------------------------------------------------
+clear 
+>>>>>>> gauss-
 global mu
 deg = pi/180;
 mu = 398600;
