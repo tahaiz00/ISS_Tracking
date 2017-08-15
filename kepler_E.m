@@ -1,26 +1,26 @@
 function E = kepler_E(e, M)
 
-% This function uses Newton’s method to solve Kepler’s
-% equation E - e*sin(E) = M for the eccentric anomaly,
-% given the eccentricity and the mean anomaly.
+% Bu iþlev, Kepler'in çözümünde Newton'un yöntemini kullanýr
+%Denklem E - e * sin (E) = E eksantrik anomali için M,
+%Sapma ve ortalama anomali göz önüne alýndýðýnda.
 %
-% E - eccentric anomaly (radians)
-% e - eccentricity, passed from the calling program
-% M - mean anomaly (radians), passed from the calling program
-% pi - 3.1415926...
+% E - eksantrik anomali (radyan)
+% E - dýþmerkezlik, çaðrý programýndan geçti.
+% M - ortalama anomali (radyan), çaðýran programdan geçti
+%Pi 3.1415926 ...
 %
-% User M-functions required: none
-% ------------------------------------------------------------
-%...Set an error tolerance:
+% Kullanýcý M-fonksiyonlarý gereklidir: yok
+% ------------------------------------------------- -----------
+% ... Hata toleransýný ayarlayýn:
 error = 1.e-8;
-%...Select a starting value for E:
+% ... E için bir baþlangýç deðeri seçin:
 if M < pi
 E = M + e/2;
 else
 E = M - e/2;
 end
-%...Iterate on Equation 3.14 until E is determined to within
-%...the error tolerance:
+
+% ... hata toleransý:
 ratio = 1;
 while abs(ratio) > error
 ratio = (E - e*sin(E) - M)/(1 - e*cos(E));

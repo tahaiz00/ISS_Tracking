@@ -1,14 +1,14 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function y = zeroTo360(x)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~~~~
 %
-% This subfunction reduces an angle to the range
-% 0 - 360 degrees.
+% Bu alt fonksiyon, bir açýyý aralýða indirir
+% 0 - 360 derece.
 %
-% x - The angle (degrees) to be reduced
-% y - The reduced value
+% X - Azaltýlacak açý (derece)
+% Y - Azalan deðer
 %
-% ------------------------------------------------------------
+% ------------------------------------------------- -----------
 if (x >= 360)
 x = x - fix(x/360)*360;
 elseif (x < 0)

@@ -2,22 +2,22 @@
 function [f, g] = f_and_g(x, t, ro, a)
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 %
-% This function calculates the Lagrange f and g coefficients.
+% Bu fonksiyon Lagrange f ve g katsayýlarýný hesaplar.
 %
-% mu - the gravitational parameter (kmˆ3/sˆ2)
-% a - reciprocal of the semimajor axis (1/km)
-% ro - the radial position at time t (km)
-% t - the time elapsed since t (s)
-% x - the universal anomaly after time t (kmˆ0.5)
-% f - the Lagrange f coefficient (dimensionless)
-% g - the Lagrange g coefficient (s)
+% Mu - yerçekimi parametresi (km3 / s2)
+% A - yarý büyük eksenli karþýlýk (1 / km)
+% Ro - t zamanýndaki radyal konum (km)
+% T - t (s) tarihinden bu yana geçen süre
+% X - t zamandan sonraki evrensel anomali (km0.5)
+% F - Lagrange f katsayýsý (boyutsuz)
+% G - Lagrange g katsayýsý (lar)
 %
-% User M-functions required: stumpC, stumpS
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gerekli: stumpC, stumpS
+% ------------------------------------------------- -----------
 global mu
 z = a*x^2;
-%...Equation 3.66a:
+
 f = 1 - x^2/ro*stumpC(z);
-%...Equation 3.66b:
+
 g = t - 1/sqrt(mu)*x^3*stumpS(z);
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜

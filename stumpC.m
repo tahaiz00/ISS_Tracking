@@ -1,15 +1,15 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function c = stumpC(z)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~
 %
-% This function evaluates the Stumpff function C(z) according
-% to Equation 3.50.
+% Bu fonksiyon, Stumpff fonksiyonunu C (z)
+% Den Eþitlik 3.50'e.
 %
-% z - input argument
-% c - value of C(z)
+% Z - giriþ argümaný
+% C - C (z) deðeri
 %
-% User M-functions required: none
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gereklidir: yok
+% ------------------------------------------------- -----------
 if z > 0
 c = (1 - cos(sqrt(z)))/z;
 elseif z < 0

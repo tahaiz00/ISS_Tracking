@@ -1,15 +1,16 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function s = stumpS(z)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~
 %
-% This function evaluates the Stumpff function S(z) according
-% to Equation 3.49.
+% Bu fonksiyon Stumpff fonksiyonunu S (z)
+% Den Denk. 3.49'a.
 %
-% z - input argument
-% s - value of S(z)
+% Z - giriþ argümaný
+% S - S (z) deðeri
 %
-% User M-functions required: none
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gereklidir: yok
+% ------------------------------------------------- -----------
+
 if z > 0
 s = (sqrt(z) - sin(sqrt(z)))/(sqrt(z))^3;
 elseif z < 0

@@ -1,25 +1,26 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function F = kepler_H(e, M)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~~~~~~
 %
-% This function uses Newton’s method to solve Kepler’s
-% equation for the hyperbola e*sinh(F) - F = M for the
-% hyperbolic eccentric anomaly, given the eccentricity and
-% the hyperbolic mean anomaly.
+% Bu iþlev, Kepler'in çözümünde Newton'un yöntemini kullanýr
+%Hiperbola ait denklem e * sinh (F) - F = M için
+%Hiperbolik eksantrik anomali, ekzantriklik ve
+% Hiperbolik ortalama anomali.
 %
-% F - hyperbolic eccentric anomaly (radians)
-% e - eccentricity, passed from the calling program
-% M - hyperbolic mean anomaly (radians), passed from the
-% calling program
+% F - hiperbolik eksantrik anomali (radyan)
+% E - dýþmerkezlik, çaðrý programýndan geçti.
+% M - hiperbolik ortalama anomali (radyan),
+%Arama programý%
 %
-% User M-functions required: none
-% ------------------------------------------------------------
-%...Set an error tolerance:
+% Kullanýcý M-fonksiyonlarý gereklidir: yok
+% ------------------------------------------------- -----------
+% ... Hata toleransýný ayarlayýn:
+
 error = 1.e-8;
-%...Starting value for F:
+% ... F için baþlangýç deðeri:
 F = M;
-%...Iterate on Equation 3.42 until F is determined to within
-%...the error tolerance:
+
+% ... hata toleransý:
 ratio = 1;
 while abs(ratio) > error
 ratio = (e*sinh(F) - F - M)/(e*cosh(F) - 1);

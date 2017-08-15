@@ -1,17 +1,17 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function j0 = J0(year, month, day)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %
-% This function computes the Julian day number at 0 UT for any
-% year between 1900 and 2100 using Equation 5.48.
+% Bu iþlev, herhangi biri için 0 UT'de Julian gün sayýsýný hesaplar
+%Denklem 5.48 ile 1900 ve 2100 arasýndaki% yýl.
 %
-% j0 - Julian day at 0 hr UT (Universal Time)
-% year - range: 1901 - 2099
-% month - range: 1 - 12
-% day - range: 1 - 31
+% J0 - 0 saat UT'de (Universal Time) Julian günü
+%Yýl aralýðý: 1901 - 2099
+% Ay aralýðý: 1 - 12
+% Gün aralýðý: 1 - 31
 %
-% User M-functions required: none
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gereklidir: yok
+% ------------------------------------------------- -----------
 j0 = 367*year - fix(7*(year + fix((month + 9)/12))/4) ...
 + fix(275*month/9) + day + 1721013.5;
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜

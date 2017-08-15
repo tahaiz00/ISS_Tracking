@@ -1,33 +1,32 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function x = kepler_U(dt, ro, vro, a)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %
-% This function uses Newton’s method to solve the universal
-% Kepler equation for the universal anomaly.
+% Bu iþlev, evrensel çözmek için Newton yöntemini kullanýr
+%Evrensel anomali için% Kepler denklemi.
 %
-% mu - gravitational parameter (kmˆ3/sˆ2)
-% x - the universal anomaly (kmˆ0.5)
-% dt - time since x = 0 (s)
-% ro - radial position (km) when x = 0
-% vro - radial velocity (km/s) when x = 0
-% a - reciprocal of the semimajor axis (1/km)
-% z - auxiliary variable (z = a*xˆ2)
-% C - value of Stumpff function C(z)
-% S - value of Stumpff function S(z)
-% n - number of iterations for convergence
-% nMax - maximum allowable number of iterations
+% ? - yerçekimi parametresi (km3 / s2)
+% X - evrensel anomali (km0.5)
+% Dt - x = 0'dan bu yana geçen süre
+% Ro - radyal konum (km) x = 0 olduðunda
+% Vro - radyal hýz (km / s) x = 0 olduðunda
+% A - yarý büyük eksenli karþýlýk (1 / km)
+% Z - yardýmcý deðiþken (z = a * x2)
+% C - Stumpff fonksiyonunun deðeri C (z)
+% S - Stumpff fonksiyonunun deðeri S (z)
+% N - yakýnsama için yineleme sayýsý
+% NMax - izin verilen maksimum yineleme sayýsý
 %
-% User M-functions required: stumpC, stumpS
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gerekli: stumpC, stumpS
+% ------------------------------------------------- -----------
 global mu
-%...Set an error tolerance and a limit on the number of
-% iterations:
+% ... Hata toleransýný ve sayý sayýsýný sýnýrlamayý ayarlayýn.
+%Yinelemeler yüzdesi:
 error = 1.e-8;
 nMax = 1000;
-%...Starting value for x:
+% ... x için baþlangýç deðeri:
 x = sqrt(mu)*abs(a)*dt;
-%...Iterate on Equation 3.62 until convergence occurs within
-%...the error tolerance:
+
 n =0;
 ratio = 1;
 while abs(ratio) > error & n <= nMax
@@ -41,7 +40,7 @@ dFdx = ro*vro/sqrt(mu)*x*(1 - a*x^2*S)+...
 ratio = F/dFdx;
 x = x - ratio;
 end
-%...Deliver a value for x, but report that nMax was reached:
+% ... x için bir deðer sunun, ancak nMax'e ulaþýldýðýný bildirin:
 if n > nMax
 fprintf('\n **No. iterations of Kepler''s equation')
 fprintf(' = %g', n)

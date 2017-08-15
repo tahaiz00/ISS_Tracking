@@ -1,37 +1,37 @@
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
 function [R,V] = rv_from_r0v0(R0, V0, t)
-% ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
-% This function computes the state vector (R,V) from the
-% initial state vector (R0,V0) and the elapsed time.
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Bu fonksiyon, durum vektörünü (R, V) hesaplar.
+% Baþlangýç durum vektörü (R0, V0) ve geçen süre.
 %
-% mu - gravitational parameter (kmˆ3/sˆ2)
-% R0 - initial position vector (km)
-% V0 - initial velocity vector (km/s)
-% t - elapsed time (s)
-% R - final position vector (km)
-% V - final velocity vector (km/s)
+% ? - yerçekimi parametresi (km3 / s2)
+% R0 - baþlangýç pozisyon vektörü (km)
+% V0 - baþlangýç hýz vektörü (km / s)
+% T - geçen süre (ler)
+% R - son konum vektörü (km)
+% V - son hýz vektörü (km / s)
 %
-% User M-functions required: kepler_U, f_and_g, fDot_and_gDot
-% ------------------------------------------------------------
+% Kullanýcý M-fonksiyonlarý gerekli: kepler_U, f_and_g, fDot_and_gDot
+% ------------------------------------------------- -----------
 
 global mu
-%...Magnitudes of R0 and V0:
+% ... R0 ve V0'un büyüklükleri:
 r0 = norm(R0);
 v0 = norm(V0);
-%...Initial radial velocity:
+% ... Ýlk radyal hýz:
 vr0 = dot(R0, V0)/r0;
-%...Reciprocal of the semimajor axis (from the energy equation):
+% ... Yarý ana eksenin karþýlýklý (enerji denkleminden):
 alpha = 2/r0 - v0^2/mu;
-%...Compute the universal anomaly:
+% ... Evrensel anomaliyi hesapla:
 x = kepler_U(t, r0, vr0, alpha);
-%...Compute the f and g functions:
+% ... f ve g fonksiyonlarýný hesapla:
 [f, g] = f_and_g(x, t, r0, alpha);
-%...Compute the final position vector:
+% ... Son konum vektörünü hesapla:
 R = f*R0 + g*V0;
-%...Compute the magnitude of R:
+% ... R'nin büyüklüðünü hesapla:
 r = norm(R);
-%...Compute the derivatives of f and g:
+% ... f ve g türevlerini hesapla:
 [fdot, gdot] = fDot_and_gDot(x, r, r0, alpha);
-%...Compute the final velocity:
+% ... Son hýzý hesapla:
 V = fdot*R0 + gdot*V0;
 % ˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜˜
