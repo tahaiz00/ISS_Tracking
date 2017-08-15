@@ -13,7 +13,7 @@
 %
 % User M-functions required: rv_from_r0v0
 % ------------------------------------------------------------
-clear
+clear 
 global mu
 mu = 398600;
 %...Input data for Example 3,7:
